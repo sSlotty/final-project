@@ -1,0 +1,2171 @@
+openapi: "3.0.1"
+info:
+  title: Clinic Management API schema
+  version: "1.0"
+servers:
+  - url: http://localhost:5000
+paths:
+  ################################ Authentication #################################
+  /authentication/token:
+    post:
+      tags:
+        - "Authentication"
+      summary: Authentication
+      requestBody:
+        required: True
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+
+  /authentication/signup:
+    post:
+      tags:
+        - "Authentication"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /authentication/token/refresh:
+    post:
+      tags:
+        - "Authentication"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+
+  /user/id:
+    get:
+      tags:
+        - "Authentication"
+      parameters:
+        - name: staffID
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/authentication"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /user:
+    get:
+      tags:
+        - "Authentication"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/user"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  ############### Patent #########################
+  /patent:
+    post:
+      tags:
+        - "Patient"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                dob:
+                  type: string
+                tel:
+                  type: string
+                email:
+                  type: string
+                job:
+                  type: string
+              required:
+                - name
+                - dob
+                - tel
+                - email
+                - job
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/user"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    get:
+      tags:
+        - "Patient"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /patent/id:
+    get:
+      tags:
+        - "Patient"
+      parameters:
+        - name: patentID
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/user"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    # put:
+    #   tags:
+    #     - "Patient"
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           type: object
+    #           properties:
+    #             patentID:
+    #               type: string
+    #             name:
+    #               type: string
+    #             dob:
+    #               type: string
+    #             tel:
+    #               type: string
+    #             email:
+    #               type: string
+    #             job:
+    #               type: string
+    #           required:
+    #             - patentID
+    #             - name
+    #             - dob
+    #             - tel
+    #             - email
+    #             - job
+    #   responses:
+    #     "200":
+    #       description: OK
+
+    delete:
+      tags:
+        - "Patient"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patentID:
+                  type: string
+              required:
+                - patentID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    default: Null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  ############## BOOKING ###################
+
+  /booking:
+    post:
+      tags:
+        - "Booking"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                staffID:
+                  type: string
+                patientID:
+                  type: string
+                details:
+                  type: string
+                dateBooking:
+                  type: string
+                status:
+                  type: string
+              required:
+                - patentID
+                - staffID
+                - details
+                - dateBooking
+                - status
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/booking"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    get:
+      tags:
+        - "Booking"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/booking"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /booking/id:
+    get:
+      tags:
+        - "Booking"
+      parameters:
+        - name: bookingID
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/booking"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /booking/id/confirm:
+    put:
+      tags:
+        - "Booking"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingID:
+                  type: string
+                status:
+                  type: string
+                update_at:
+                  type: string
+              required:
+                - bookingID
+                - status
+                - update_at
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      bookingID:
+                        type: string
+                      status:
+                        type: string
+                      update_at:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  ####### REPORT #####
+  /report:
+    post:
+      tags:
+        - "Report"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingID:
+                  type: string
+                staffID:
+                  type: string
+                patentID:
+                  type: string
+                header:
+                  type: string
+                detail:
+                  type: string
+              required:
+                - bookingID
+                - staffID
+                - patentID
+                - header
+                - detail
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    get:
+      tags:
+        - "Report"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      reportID:
+                        type: string
+                      header:
+                        type: string
+                      detail:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /report/id:
+    get:
+      tags:
+        - "Report"
+      parameters:
+        - name: reportID
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    delete:
+      tags:
+        - "Report"
+      requestBody:
+        required: True
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+              required:
+                - reportID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    default: Null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    put:
+      tags:
+        - "Report"
+      requestBody:
+        required: True
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+                header:
+                  type: string
+                details:
+                  type: string
+              required:
+                - reportID
+                - header
+                - details
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      reportID:
+                        type: string
+                      header:
+                        type: string
+                      detail:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /booking/id/close:
+    put:
+      tags:
+        - "Report"
+      requestBody:
+        required: True
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingID:
+                  type: string
+              required:
+                - bookingID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      bookingID:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    # $ref: "#/components/schemas/"
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  ######################## DISPENSE ##############
+  /dispense:
+    post:
+      tags:
+        - "Dispense"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+                meds_ref:
+                  type: object
+                  properties:
+                    med_id:
+                      type: string
+                    med_amount:
+                      type: integer
+              required:
+                - reportID
+                - meds_ref
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    default: Null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    get:
+      tags:
+        - "Dispense"
+      parameters:
+        - name: reportID
+          in: query
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    delete:
+      tags:
+        - "Dispense"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+              required:
+                - reportID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /dispense/confirm:
+    post:
+      tags:
+        - "Dispense"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+              required:
+                - reportID
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      reportID:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  #################################### ORDER ###########################
+  /orders:
+    get:
+      tags:
+        - "Payment"
+      summary: search order
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    post:
+      tags:
+        - "Payment"
+      summary: add order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+                order:
+                  type: object
+                  properties:
+                    reportID:
+                      type: string
+                    subject:
+                      type: string
+                    price:
+                      type: integer
+                    staffID:
+                      type: string
+              required:
+                - order
+                - reportID
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    delete:
+      tags:
+        - "Payment"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderID:
+                  type: string
+              required:
+                - orderID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /orders/report:
+    get:
+      tags:
+        - "Payment"
+      parameters:
+        - name: reportID
+          in: query
+          description: report id reference order
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      report:
+                        type: string
+                      subject:
+                        type: string
+                      price:
+                        type: number
+                      staffID:
+                        type: string
+                      create_at:
+                        type: string
+                      update_at:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /payments:
+    get:
+      tags:
+        - "Payment"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      reportID:
+                        type: string
+                      objMed:
+                        type: object
+                        properties:
+                          medID:
+                            type: string
+                          name:
+                            type: string
+                          price:
+                            type: number
+                          amount:
+                            type: string
+                          sump_rice:
+                            type: number
+                      objOrder:
+                        type: object
+                        properties:
+                          orderID:
+                            type: string
+                          subject:
+                            type: string
+                          sump_rice:
+                            type: number
+                      price:
+                        type: number
+                      status:
+                        type: string
+                      create_at:
+                        type: string
+                      update_at:
+                        type: string
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+    post:
+      tags:
+        - "Payment"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+              required:
+                - reportID
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /payments/id:
+    put:
+      tags:
+        - "Payment"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reportID:
+                  type: string
+              required:
+                - reportID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  ################################ PAYMENT #############################
+  /medicine:
+    post:
+      tags:
+        - "Medicine"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                amount:
+                  type: string
+                lot_num:
+                  type: string
+                MFG:
+                  type: string
+                EXP:
+                  type: string
+                price:
+                  type: string
+              required:
+                - name
+                - amount
+                - lot_num
+                - MFG
+                - EXP
+                - price
+      responses:
+        "201":
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    get:
+      tags:
+        - "Medicine"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /medicine/id:
+    get:
+      tags:
+        - "Medicine"
+      parameters:
+        - name: medicineID
+          in: query
+          description: medicine id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+    put:
+      tags:
+        - "Medicine"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                medicineID:
+                  type: string
+                amount:
+                  type: number
+              required:
+                - medicineID
+                - amount
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+    delete:
+      tags:
+        - "Medicine"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                medicineID:
+                  type: string
+              required:
+                - medicineID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+  /orc:
+    post:
+      tags:
+        - "ORC"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                img:
+                  type: string
+              required:
+                - img
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/medicine"
+                  message:
+                    type: string
+                    default: "Success"
+                  status:
+                    type: number
+        "400":
+          description: ERROR
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+        "204":
+          description: NO CONTENT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    default: null
+                  message:
+                    type: string
+                  status:
+                    type: integer
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    authentication:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          default: "Bearer"
+        expires_in:
+          type: integer
+        staffID:
+          type: string
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+        username:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        department:
+          type: string
+    patent:
+      type: object
+      properties:
+        patentID:
+          type: string
+        name:
+          type: string
+        dob:
+          type: string
+        tel:
+          type: string
+        email:
+          type: string
+        job:
+          type: string
+        create_at:
+          type: string
+        update_at:
+          type: string
+    booking:
+      type: object
+      properties:
+        bookingID:
+          type: string
+        staffID:
+          type: string
+        patentID:
+          type: string
+        detail:
+          type: string
+        dateBooking:
+          type: string
+        status:
+          type: string
+        create_at:
+          type: string
+        update_at:
+          type: string
+    medicine:
+      type: object
+      properties:
+        medicineID:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+        lot_num:
+          type: string
+        MFG:
+          type: string
+        EXP:
+          type: string
+        price:
+          type: string
+        create_at:
+          type: string
+        update_at:
+          type: string

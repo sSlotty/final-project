@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    background: #e9ebee;
+    color: #1d2129;
+    font-family: 'Mitr', sans-serif;
+    background: url('https://images.wallpaperscraft.com/image/pyramids_starry_sky_night_161840_1920x1080.jpg') no-repeat center center fixed;
+
+}

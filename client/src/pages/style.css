@@ -1,0 +1,48 @@
+/* card */
+.touch {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .touch .card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+    padding-right: 10px;
+  }
+  
+  @media (min-width: 992px) {
+    .touch .card:hover {
+      margin-top: -.30rem;
+      margin-bottom: .30rem;
+      box-shadow: 0 0.7rem 1rem 0 rgba(0, 0, 0, 0.1);
+      transition: .3s;
+    }
+  
+  }
+.layout-content{
+    border-radius: 10px;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  opacity:0.5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  opacity:0.5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  opacity:0.5;
+}
