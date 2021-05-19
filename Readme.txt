@@ -2,12 +2,14 @@ install project
 required
  - npm
  - python 3.8
+ - swager
 
 git clone https://github.com/sSlotty/final-project
 
 install api
   cd flask-api
   pip install -r requiredment.txt
+  pip install flask-swagger-ui
 
 start api
   python app.py
