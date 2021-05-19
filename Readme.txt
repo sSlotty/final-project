@@ -20,3 +20,9 @@ install react
 
 start react
   npm start
+  
+  
+  สามารถเข้าไปดู commit project ได้ที่
+  
+  API : https://github.com/sSlotty/clinic-api
+  REACT : https://github.com/sSlotty/clinic-react
